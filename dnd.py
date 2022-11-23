@@ -28,7 +28,9 @@ def main():
     while decision.lower() not in ['y','n']:
         decision = input("Would you like to load a previous game? (y/n)\n")
     if decision.lower() == 'y':
-        file = input("What is the name of the file?\n")
+        file = ""
+        while file[-5:] != '.json':
+            file = input("Enter the filename to load from (must end in .json):\n")
         players, enemies = load(players,enemies,file)
         requestInput()
     else:
@@ -90,6 +92,11 @@ def controlFlow(usrInput,players,enemies):
     #Save and exit! They both call the same function.
     if (usrInput[0] == 'save' or usrInput[0] == 'exit') and len(usrInput) == 2:
         file = usrInput[1]
+        if file[-5:] == '.json':
+            save(players,enemies,file)
+        else:
+            print("Invalid file type. (Must be .json")
+            requestInput()
         save(file,players,enemies)
     elif (usrInput[0] == 'save' or usrInput[0] == 'exit') and (not len(usrInput) == 2):
         print("missing parameter: filename")

@@ -32,7 +32,7 @@ Deals damage. Hasn't been coded yet.<br>    Parameters-<br>
 * name of player or enemy<br>    
 * damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)
 
-<h2>help</h2>:
+<h2>help</h2>
 
 Reads this list<br>    Parameters-<br>    
 * None
@@ -42,17 +42,17 @@ Reads this list<br>    Parameters-<br>
 Saves and exits!<br>  Parameters-<br>    
 * filename to save to (has to end in .json)
 
-<h2>save</h2>:
+<h2>save</h2>
 
 Saves and exits!<br>  Parameters-<br>    
 * filename to save to (has to end in .json)
 
-<h2>list</h2>:
+<h2>list</h2>
 
 Lists all the players and enemies in the game<br>    Parameters-<br>
 * None
 
-<h2>load<h2>:
+<h2>load</h2>
 
 Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.<br>    Parameters-<br>    
 * filename to load from (must end in)

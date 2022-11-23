@@ -1,0 +1,61 @@
+<h1>DESCRIPTION</h1>
+This is a work in progress program which aims to make being a DM simpler. The end goal for this project is to be able to automate combat encounters with large groups of low-level monsters. 
+<h1>KNOWN ISSUES</h1>
+You will probably find some syntax to put into the terminal which crashes the program. I am working on making all the inputs as idiot proof as I can. If it's crashing while you're trying to do something, check the comments and make sure you've got the exact right syntax. It's a pain.
+
+The command to load a new file
+
+<h1>DEPENDANCIES</h1>
+ =< Python 3.6
+<h1>Usage</h1>
+add:
+
+Adds players or enemies to the game!
+   Parameters-
+    p or e, for player or enemy
+   number of players to add
+
+status:
+
+Gathers the current hp of a player or enemy
+     Parameters-
+    p or e, for player or enemy
+    name of player or enemy
+
+attack:
+
+Deals damage. Hasn't been coded yet.
+    Parameters-
+    p or e, for player or enemy
+    name of player or enemy
+    damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)
+
+help:
+
+Reads this list
+    Parameters-
+    None
+
+exit:
+
+Saves and exits!
+  Parameters-
+    filename to save to (has to end in .json)
+
+save:
+
+Saves and exits!
+  Parameters-
+    filename to save to (has to end in .json)
+
+list:
+
+Lists all the players and enemies in the game
+    Parameters-
+    None
+
+load:
+
+Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.
+    Parameters-
+    filename to load from

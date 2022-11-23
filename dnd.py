@@ -12,8 +12,8 @@ def main():
     'status':"Gathers the current hp of a player or enemy\n     Parameters-\n    p or e, for player or enemy\n    name of player or enemy",
     'attack':"Deals damage. Hasn't been coded yet.\n    Parameters-\n    p or e, for player or enemy\n    name of player or enemy\n    damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)",
     'help':"Reads this list\n    Parameters-\n    None",
-    'exit':"Saves and exits!\n  Parameters-\n    filename to save to",
-    'save':"Saves and exits!\n  Parameters-\n    filename to save to",
+    'exit':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",
+    'save':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",
     'list': "Lists all the players and enemies in the game\n    Parameters-\n    None",
     'load': "Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.\n    Parameters-\n    filename to load from"}
     

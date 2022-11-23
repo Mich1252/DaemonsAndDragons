@@ -1,7 +1,15 @@
 <h1>DESCRIPTION</h1>
-This is a work in progress program which aims to make being a DM simpler. The end goal for this project is to be able to automate combat encounters with large groups of low-level monsters. 
+This is a work in progress program which aims to make being a DM simpler. It provides the user with a console to perform functionsThe end goal for this project is to be able to automate combat encounters with large groups of low-level monsters. 
 <h1>KNOWN ISSUES</h1>
 You will probably find some syntax to put into the terminal which crashes the program. I am working on making all the inputs as idiot proof as I can. If it's crashing while you're trying to do something, check the comments and make sure you've got the exact right syntax. It's a pain.
+
+The function for loading data from a file only works when main is executed. This means you can only load new data when the program is first run.
+
+<h1>TODO</h2>
+The attack function literally hasn't been programmed yet.
+Fix the load function.
+Implement rolling initiave.
+
 
 The command to load a new file
 

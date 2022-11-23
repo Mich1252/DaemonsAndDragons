@@ -211,7 +211,7 @@ def load(players,enemies,file):
     enemies = json.loads(fileObject[1])
     print("Loading successful!")
     return players,enemies
-def save(file,players,enemies):
+def save(players,enemies,file):
     """
     This is the code that saves the game. It saves the players and enemies dicts to a file.
         Parameters:
@@ -235,12 +235,42 @@ def addEnemy(enemies,eCount):
             enemies: the enemies dict
             eCount: The number of enemies to add
     """
-    for i in range(eCount):
-        attributes = {}
-        name = input("What is the name of enemy " + str(i+1) + "?\n")
-        attributes["hp"] = input("What is the HP of enemy " + str(i+1) + "?\n")
-        attributes["curHp"] = input("What is the current HP of enemy " + str(i+1) + "?\n")
-        attributes["ac"] = input("What is the AC of enemy " + str(i+1) + "?\n")
-        enemies[name] = attributes
+    """
+    This block of code stores a few premade enemies in a dictionary. That way I can spam add Kobolds or Goblins or whatever.
+    """
+    ###PREMADE ENEMIES BEGIN###
+    premades ={
+        'goblin':{
+            'hp':7,
+            'ac':15,
+            'curHp':7,
+            'strength':-1,
+            'dexterity':2,
+            'constitution':0,
+            'intelligence':0,
+            'wisdom':-1,
+            'charisma':-1,
+            'mAttack':'1d6+2',
+            'mAttackBonus':4,
+            'rAttack':'1d6+2',
+            'rAttackBonus':4
+        }}
+   
+
+    if input("Would you like to add a premade enemy(s)? (y/n)\n").lower() == 'y':
+        premade = input("Which premade enemy would you like to add?\n")
+        if premade.lower() in premades:
+            for counter in range(eCount):
+                enemies[premade+str(counter)] = premades[premade]
+        else:
+            print("That enemy does not exist.")
+    else:
+        for i in range(eCount):
+            attributes = {}
+            name = input("What is the name of enemy " + str(i+1) + "?\n")
+            attributes["hp"] = input("What is the HP of enemy " + str(i+1) + "?\n")
+            attributes["curHp"] = input("What is the current HP of enemy " + str(i+1) + "?\n")
+            attributes["ac"] = input("What is the AC of enemy " + str(i+1) + "?\n")
+            enemies[name] = attributes
     requestInput()
 main()

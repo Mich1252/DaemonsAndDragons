@@ -16,31 +16,43 @@ The command to load a new file should probably work.
 <h1>Usage</h1>
 add:
 
-Adds players or enemies to the game!<br>   Parameters-<br>    * p or e, for player or enemy<br>   * number of players to add
+Adds players or enemies to the game!<br>   Parameters-<br>    
+* p or e, for player or enemy<br>   
+* number of players to add
 status:
 
-Gathers the current hp of a player or enemy<br>     Parameters-<br>   * p or e, for player or enemy<br>    * name of player or enemy
+Gathers the current hp of a player or enemy<br>     Parameters-<br>  
+* p or e, for player or enemy<br>    
+* name of player or enemy
 
 attack:
 
-Deals damage. Hasn't been coded yet.<br>    Parameters-<br>    * p or e, for player or enemy<br>    * name of player or enemy<br>    * damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)
+Deals damage. Hasn't been coded yet.<br>    Parameters-<br>    
+* p or e, for player or enemy<br>   
+* name of player or enemy<br>    
+* damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)
 
 help:
 
-Reads this list<br>    Parameters-<br>    * None
+Reads this list<br>    Parameters-<br>    
+* None
 
 exit:
 
-Saves and exits!<br>  Parameters-<br>    * filename to save to (has to end in .json)
+Saves and exits!<br>  Parameters-<br>    
+* filename to save to (has to end in .json)
 
 save:
 
-Saves and exits!<br>  Parameters-<br>    * filename to save to (has to end in .json)
+Saves and exits!<br>  Parameters-<br>    
+* filename to save to (has to end in .json)
 
 list:
 
-Lists all the players and enemies in the game<br>    Parameters-<br>    * None
+Lists all the players and enemies in the game<br>    Parameters-<br>
+* None
 
 load:
 
-Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.<br>    Parameters-<br>    * filename to load from (must end in .json)
+Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.<br>    Parameters-<br>    
+* filename to load from (must end in)

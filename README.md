@@ -14,45 +14,45 @@ The command to load a new file should probably work.
 <h1>DEPENDANCIES</h1>
  =< Python 3.6
 <h1>Usage</h1>
-add:
+<h2>add</h2>
 
 Adds players or enemies to the game!<br>   Parameters-<br>    
 * p or e, for player or enemy<br>   
-* number of players to add
-status:
+* number of players to add<br>
+<h2>status</h2>
 
 Gathers the current hp of a player or enemy<br>     Parameters-<br>  
 * p or e, for player or enemy<br>    
 * name of player or enemy
 
-attack:
+<h2>attack</h2>
 
 Deals damage. Hasn't been coded yet.<br>    Parameters-<br>    
 * p or e, for player or enemy<br>   
 * name of player or enemy<br>    
 * damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)
 
-help:
+<h2>help</h2>:
 
 Reads this list<br>    Parameters-<br>    
 * None
 
-exit:
+<h2>exit</h2>
 
 Saves and exits!<br>  Parameters-<br>    
 * filename to save to (has to end in .json)
 
-save:
+<h2>save</h2>:
 
 Saves and exits!<br>  Parameters-<br>    
 * filename to save to (has to end in .json)
 
-list:
+<h2>list</h2>:
 
 Lists all the players and enemies in the game<br>    Parameters-<br>
 * None
 
-load:
+<h2>load<h2>:
 
 Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.<br>    Parameters-<br>    
 * filename to load from (must end in)

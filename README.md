@@ -61,3 +61,14 @@ Loads the data from another .json. Currently broken. Loading only works when the
 Removes players or enemies from the game.<br>Parameters-<br>     
 * team, either players or enemies<br>
 * names of the players/emeies to remove
+<h2>rollinit</h2>
+
+Rolls initiave.<br>Parameters-
+
+* None
+
+<h2>printinit</h2>
+
+Prints the turn order.<br>Parameters-
+
+* None

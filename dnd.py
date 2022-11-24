@@ -1,7 +1,7 @@
 #Author: Andrew Cohn
 #DESC: DND Dm Console. Allows the DM to add players and enemies, and to keep track of their health, as well as various other attributes.
-
-
+from random import randint as rand
+import re
 import json
 def main():
     
@@ -16,7 +16,10 @@ def main():
     'exit':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",
     'save':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",
     'list': "Lists all the players and enemies in the game\n    Parameters-\n    None",
-    'load': "Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.\n    Parameters-\n    filename to load from"}
+    'load': "Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.\n    Parameters-\n    filename to load from",
+    'rollinit':"Rolls initiative for all players and enemies.\n    Parameters-\n    None",
+    'printinit':"Prints the initiative order.\n    Parameters-\n    None",
+    }
     
     usrInput = ['']
     #These globals are used to store the players and enemies, as dictionaries with nested dictionaries.
@@ -59,8 +62,9 @@ def controlFlow(usrInput,players,enemies):
             addPlayer(players,int(usrInput[2]))
         elif str(usrInput[1])[0].lower() == 'e':
             addEnemy(enemies,int(usrInput[2]))
-        else:
-            print("Missing parameter(s) team and player count.")
+    elif usrInput[0] == 'add' and  not len(usrInput) == 3:
+        print("Missing parameter(s) team and player count.")
+        requestInput()
     #Status Command!
     if usrInput[0] == 'status':
         if str(usrInput[1])[0].lower() == 'p':
@@ -97,7 +101,11 @@ def controlFlow(usrInput,players,enemies):
             save(players,enemies,file)
         else:
             print("Invalid file type. (Must be .json")
+        if usrInput[0] == 'save':
             requestInput()
+        else:
+            print("Goodbye!")
+            exit()
         save(file,players,enemies)
     elif (usrInput[0] == 'save' or usrInput[0] == 'exit') and (not len(usrInput) == 2):
         print("missing parameter: filename")
@@ -124,6 +132,92 @@ def controlFlow(usrInput,players,enemies):
         else:
             print("Invalid input for team")
         requestInput()
+    #attack command!
+    if usrInput[0] == 'attack':
+        print("calling attack function")
+        attack(usrInput[1],usrInput[2])
+        requestInput()
+    #Roll init!
+    if usrInput[0] == 'rollinit':
+        initDict = {}
+        for name in players.keys():
+            initDict[name] = rand(1,20)+int(players[name]['dexterity'])
+        for name in enemies.keys():
+            initDict[name] = rand(1,20)+int(enemies[name]['dexterity'])
+        global turnOrder 
+        turnOrder = sorted(initDict.items(), key=lambda x: x[1], reverse=True)
+        print("Turn order:")
+        for i in turnOrder:
+            print(str(i[0])+": "+str(i[1]))
+        requestInput()
+    if usrInput[0] == 'printinit':
+        print("Turn order:")
+        for i in turnOrder:
+            print(str(i[0])+": "+str(i[1]))
+            requestInput()
+
+        
+def attack(attacker,victim):
+    """
+    This function deals damage to players and enemies.
+    It also processes the damage string to determine if the damage should be rolled or not.
+    Parameters-
+        attacker: the name of the attacker
+        victim: the name of the victim
+    """
+    
+    #If the player is hitting an enemy, ask for damage, and subtract from enemy HP.
+    if attacker in players:
+        damage = int(input("Enter the int damage to deal to the enemy:\n"))
+        enemies[victim]['curHp'] -= damage
+    #If the enemy is attacking:
+    elif attacker in enemies:    
+        #Does the enemy use ranged or melee? Ask the user.    
+            attack = ""
+            while attack not in {'r','m'}:
+                attack = input("ranged or melee? (r/m)\n")
+            
+            #If the player hits with a ranged move:
+            if attack == 'r' and (rand(1,20)+enemies[attacker]['rAttackBonus']) >= int(players[victim]['ac']):
+                #parse the damage string to determine what to roll
+                damageInt = 0
+                damageList = re.split("d|\+",enemies[attacker]['mAttack'])
+                numDice = int(damageList[0])
+                diceType = int(damageList[1])
+                modifier = int(damageList[2])
+                #Casino!
+                for i in range(numDice):
+                    damageInt += rand(1,diceType)
+                players[victim]['curHp'] -= damageInt+modifier
+                print("Hit for "+str(damageInt+modifier)+"!")
+            
+            #If ranged attack misses:
+            elif attack == 'r' and (rand(1,20)+int(enemies[attacker]['rAttackBonus'])) <= int(players[victim]['ac']):
+                print("Ranged attack missed!")
+            
+            #If the player hits with a melee move:
+            elif attack == 'm' and (rand(1,20)+int(enemies[attacker]['mAttackBonus'])) >= int(players[victim]['ac']):
+                #Parse the dice string to determine what to roll
+                damageInt = 0
+                damageList = re.split("d|\+",enemies[attacker]['mAttack'])
+                numDice = int(damageList[0])
+                diceType = int(damageList[1])
+                modifier = int(damageList[2])
+                #Cha-Ching!
+                for i in range(numDice):
+                    damageInt += rand(1,diceType)
+                players[victim]['curHp'] -= damageInt+modifier
+                print("Hit for "+str(damageInt+modifier)+"!")
+            #If melee attack misses:
+            elif attack == 'm' and (rand(1,20)+int(enemies[attacker]['mAttackBonus'])) <= int(players[victim]['ac']):
+                print("Melee attack missed!")
+            #If God has left this accursed realm:
+            else:
+                print("This is a failsafe and should literally never execute.")
+
+
+
+
 def help():
     """
     Prints the help menu.
@@ -153,7 +247,7 @@ def requestInput():
     """
     usrInput = [' ']
     while usrInput[0].lower() not in commands:
-        console = input("Enter a command: ")
+        console = input("Enter a command: ").lower()
         usrInput = console.split()
     controlFlow(console.split(' '),players,enemies)
 
@@ -165,18 +259,19 @@ def addPlayer(players,pCount):
     casters = {'bard','cleric','druid','paliden','sorcerer','wizard','artificer','warlock'}
     for i in range(pCount):
         attributes = {}
-        name = input("What is the name of player " + str(i+1) + "?\n")
+        name = input("What is the name of player " + str(i+1) + "?\n").lower()
         attributes["class"] = input("What is the class of player " + str(i+1) + "?\n")
-        attributes["level"] = input("What is the level of player " + str(i+1) + "?\n")
-        attributes["charisma"] = input("What is the charisma of player " + str(i+1) + "?\n")
-        attributes["strength"] = input("What is the strength bonus of player " + str(i+1) + "?\n")
-        attributes["dexterity"] = input("What is the dexterity bonus of player " + str(i+1) + "?\n")
-        attributes["constitution"] = input("What is the constitution bonus of player " + str(i+1) + "?\n")
-        attributes["intelligence"] = input("What is the intelligence bonusof player " + str(i+1) + "?\n")
-        attributes["wisdom"] = input("What is the wisdom of player " + str(i+1) + "?\n")
-        attributes['hp'] = input('What is the max HP of player ' + str(i+1) + '?\n')
-        attributes['ac'] = input('What is the AC of player ' + str(i+1) + '?\n')
-        attributes['curHp'] = input('What is the current HP of player ' + str(i+1) + '?\n')
+        attributes["level"] = int(input("What is the level of player " + str(i+1) + "?\n"))
+        attributes["charisma"] = int(input("What is the charisma of player " + str(i+1) + "?\n"))
+        attributes["strength"] = int(input("What is the strength bonus of player " + str(i+1) + "?\n"))
+        attributes["dexterity"] = int(input("What is the dexterity bonus of player " + str(i+1) + "?\n"))
+        attributes["constitution"] = int(input("What is the constitution bonus of player " + str(i+1) + "?\n"))
+        attributes["intelligence"] = int(input("What is the intelligence bonus of player " + str(i+1) + "?\n"))
+        attributes["wisdom"] = int(input("What is the wisdom of player " + str(i+1) + "?\n"))
+        attributes['hp'] = int(input('What is the max HP of player ' + str(i+1) + '?\n'))
+        attributes['ac'] = int(input('What is the AC of player ' + str(i+1) + '?\n'))
+        attributes['curHp'] = int(input('What is the current HP of player ' + str(i+1) + '?\n'))
+        attributes['proficency'] = int(input('What is the proficency bonus of player ' + str(i+1) + '?\n'))
         if attributes['class'] in casters:
             for i in range(1,int(input("How many spells would you like to add?\n"))):
                 spells = set()
@@ -241,8 +336,8 @@ def save(players,enemies,file):
     fileObject.write(json.dumps(players)+"\n")
     fileObject.write(json.dumps(enemies))
     fileObject.close()
-    print('Saved! Exiting...')
-    exit()
+    print('Saved!')
+
     
 
 def addEnemy(enemies,eCount):
@@ -278,7 +373,7 @@ def addEnemy(enemies,eCount):
     if input("Would you like to add a premade enemy(s)? (y/n)\n").lower() == 'y':
         premade = input("Which premade enemy would you like to add?\n")
         if premade.lower() in premades:
-            for counter in range(eCount):
+            for counter in range(1,eCount+1):
                 enemies[premade+str(counter)] = premades[premade]
         else:
             print("That enemy does not exist.")
@@ -286,9 +381,19 @@ def addEnemy(enemies,eCount):
         for i in range(eCount):
             attributes = {}
             name = input("What is the name of enemy " + str(i+1) + "?\n")
-            attributes["hp"] = input("What is the HP of enemy " + str(i+1) + "?\n")
-            attributes["curHp"] = input("What is the current HP of enemy " + str(i+1) + "?\n")
-            attributes["ac"] = input("What is the AC of enemy " + str(i+1) + "?\n")
+            attributes["hp"] = int(input("What is the HP of enemy " + str(i+1) + "?\n"))
+            attributes["curHp"] = int(input("What is the current HP of enemy " + str(i+1) + "?\n"))
+            attributes["ac"] = int(input("What is the AC of enemy " + str(i+1) + "?\n"))
+            attributes["strength"] = int(input("What is the strength bonus of enemy " + str(i+1) + "?\n"))
+            attributes["dexterity"] = int(input("What is the dexterity bonus of enemy " + str(i+1) + "?\n"))
+            attributes["constitution"] = int(input("What is the constitution bonus of enemy " + str(i+1) + "?\n"))
+            attributes["intelligence"] = int(input("What is the intelligence bonus of enemy " + str(i+1) + "?\n"))
+            attributes["wisdom"] = int(input("What is the wisdom bonus of enemy " + str(i+1) + "?\n"))
+            attributes["charisma"] = int(input("What is the charisma bonus of enemy " + str(i+1) + "?\n"))
+            attributes["mAttack"] = input("What is the melee attack of enemy " + str(i+1) + "?\n")
+            attributes["mAttackBonus"] = int(input("What is the melee attack bonus of enemy " + str(i+1) + "?\n"))
+            attributes["rAttack"] = input("What is the ranged attack of enemy " + str(i+1) + "?\n")
+            attributes["rAttackBonus"] = int(input("What is the ranged attack bonus of enemy " + str(i+1) + "?\n"))
             enemies[name] = attributes
     requestInput()
 main()

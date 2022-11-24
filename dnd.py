@@ -9,6 +9,7 @@ def main():
     global commands 
     commands = {
     'add':"Adds players or enemies to the game!\n   Parameters-\n    p or e, for player or enemy\n   number of players to add",
+    'remove':'Removes players or enemies from the game!\n   Parameters-\n    p or e, for player or enemy\n   names of players/enemies to remove',
     'status':"Gathers the current hp of a player or enemy\n     Parameters-\n    p or e, for player or enemy\n    name of player or enemy",
     'attack':"Deals damage. Hasn't been coded yet.\n    Parameters-\n    p or e, for player or enemy\n    name of player or enemy\n    damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)",
     'help':"Reads this list\n    Parameters-\n    None",
@@ -106,6 +107,23 @@ def controlFlow(usrInput,players,enemies):
         listNames(players,enemies)
         requestInput()
 
+    #Remove command!
+    if usrInput[0] == 'remove':
+        if str(usrInput[1])[0].lower() == 'p':
+            for i in range(len(usrInput)-2):
+                if usrInput[i+2] in players:
+                    del players[usrInput[i+2]]
+                else:
+                    print("Player "+str(usrInput[i+2])+" not found.")
+        elif str(usrInput[1])[0].lower() == 'e':
+            for i in range(len(usrInput)-2):
+                if usrInput[i+2] in enemies:
+                    del enemies[usrInput[i+2]]
+                else:
+                    print("Enemy "+str(usrInput[i+2])+" not found.")
+        else:
+            print("Invalid input for team")
+        requestInput()
 def help():
     """
     Prints the help menu.

@@ -190,7 +190,7 @@ def attack(attacker,victim):
                     damageInt += rand(1,diceType)
                 players[victim]['curHp'] -= damageInt+modifier
                 print("Hit for "+str(damageInt+modifier)+"!")
-            
+                print(victim+" has "+str(players[victim]['curHp'])+" HP left.")
             #If ranged attack misses:
             elif attack == 'r' and (rand(1,20)+int(enemies[attacker]['rAttackBonus'])) <= int(players[victim]['ac']):
                 print("Ranged attack missed!")
@@ -208,6 +208,7 @@ def attack(attacker,victim):
                     damageInt += rand(1,diceType)
                 players[victim]['curHp'] -= damageInt+modifier
                 print("Hit for "+str(damageInt+modifier)+"!")
+                print(victim+" has "+str(players[victim]['curHp'])+" HP left.")
             #If melee attack misses:
             elif attack == 'm' and (rand(1,20)+int(enemies[attacker]['mAttackBonus'])) <= int(players[victim]['ac']):
                 print("Melee attack missed!")

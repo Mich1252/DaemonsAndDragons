@@ -27,7 +27,7 @@ Gathers the current hp of a player or enemy<br>     Parameters-<br>
 
 <h2>attack</h2>
 
-Deals damage. Hasn't been coded yet.<br>    Parameters-<br>    
+Deals damage. If a player is attacking an enemy, have them roll and enter the value. If an enemy is attacking a player, it parses the damage string and rolls to subtract from their HP.<br>    Parameters-<br>    
 * p or e, for player or enemy<br>   
 * name of player or enemy<br>    
 * damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)

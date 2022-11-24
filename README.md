@@ -55,7 +55,9 @@ Lists all the players and enemies in the game<br>    Parameters-<br>
 <h2>load</h2>
 
 Loads the data from another .json. Currently broken. Loading only works when the program is first run for now. TODO.<br>    Parameters-<br>    
-* filename to load from (must end in)
+* filename to load from (must end in .json)
 <h2>remove</h2>
 
-Removes players or enemies from the game.<br>Parameters-<br>     team, either players or enemies<br>    names of the players/emeies to remove
+Removes players or enemies from the game.<br>Parameters-<br>     
+* team, either players or enemies<br>
+* names of the players/emeies to remove

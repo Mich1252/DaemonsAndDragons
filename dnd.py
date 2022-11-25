@@ -10,7 +10,7 @@ def main():
     'add':"Adds players or enemies to the game!\n   Parameters-\n    p or e, for player or enemy\n   number of players to add",
     'remove':'Removes players or enemies from the game!\n   Parameters-\n    p or e, for player or enemy\n   names of players/enemies to remove',
     'status':"Gathers the current hp of a player or enemy\n     Parameters-\n    p or e, for player or enemy\n    name of player or enemy",
-    'attack':"Deals damage. \n    Parameters-\n    target, which can be a player or enemy, and should be a string\n    victim,which can be a player or enemy, and should be a string",
+    'attack':"Deals damage. \n    Parameters-\n    attacker, which can be a player or enemy, and should be a string\n    victim,which can be a player or enemy, and should be a string",
     'help':"Reads this list\n    Parameters-\n    None",
     'exit':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",
     'save':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",

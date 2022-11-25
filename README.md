@@ -5,11 +5,8 @@ You will probably find some syntax to put into the terminal which crashes the pr
 
 The function for loading data from a file only works when main is executed. This means you can only load new data when the program is first run.
 
-<h1>TODO</h2>
-The attack function literally hasn't been programmed yet.<br>
+<h1>TODO</h1>
 Fix the load function.<br>
-Implement rolling initiave.<br>
-The command to load a new file should probably work.
 
 <h1>DEPENDANCIES</h1>
  =< Python 3.6
@@ -28,9 +25,8 @@ Gathers the current hp of a player or enemy<br>     Parameters-<br>
 <h2>attack</h2>
 
 Deals damage. If a player is attacking an enemy, have them roll and enter the value. If an enemy is attacking a player, it parses the damage string and rolls to subtract from their HP.<br>    Parameters-<br>    
-* p or e, for player or enemy<br>   
-* name of player or enemy<br>    
-* damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)
+* name of attacker, should be a string<br>   
+* name of victim, which should be a string<br> 
 
 <h2>help</h2>
 

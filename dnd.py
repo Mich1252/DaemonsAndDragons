@@ -3,15 +3,14 @@
 from random import randint as rand
 import re
 import json
-def main():
-    
+def main():   
     #Giant dictonary containing all the commands. Used to print help menu, and to check in if the user input is valid.
     global commands 
     commands = {
     'add':"Adds players or enemies to the game!\n   Parameters-\n    p or e, for player or enemy\n   number of players to add",
     'remove':'Removes players or enemies from the game!\n   Parameters-\n    p or e, for player or enemy\n   names of players/enemies to remove',
     'status':"Gathers the current hp of a player or enemy\n     Parameters-\n    p or e, for player or enemy\n    name of player or enemy",
-    'attack':"Deals damage. Hasn't been coded yet.\n    Parameters-\n    p or e, for player or enemy\n    name of player or enemy\n    damage to deal (can be an int, or a string in the form of ydn+z, where y is the number of dice, n is the type of dice, and z is the modifier)",
+    'attack':"Deals damage. \n    Parameters-\n    target, which can be a player or enemy, and should be a string\n    victim,which can be a player or enemy, and should be a string",
     'help':"Reads this list\n    Parameters-\n    None",
     'exit':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",
     'save':"Saves and exits!\n  Parameters-\n    filename to save to (has to end in .json)",
@@ -93,9 +92,9 @@ def controlFlow(usrInput,players,enemies):
         requestInput()
     else:
         pass
-    
+
     #Save and exit! They both call the same function.
-    if (usrInput[0] == 'save' or usrInput[0] == 'exit') and len(usrInput) == 2:
+    if (str(usrInput[0]).lower() == 'save' or str(usrInput[0]).lower() == 'exit') and len(usrInput) == 2:
         file = usrInput[1]
         if file[-5:] == '.json':
             save(players,enemies,file)
@@ -106,7 +105,6 @@ def controlFlow(usrInput,players,enemies):
         else:
             print("Goodbye!")
             exit()
-        save(file,players,enemies)
     elif (usrInput[0] == 'save' or usrInput[0] == 'exit') and (not len(usrInput) == 2):
         print("missing parameter: filename")
         requestInput()
@@ -117,13 +115,17 @@ def controlFlow(usrInput,players,enemies):
 
     #Remove command!
     if usrInput[0] == 'remove':
+        #If the user wants to remove a player
         if str(usrInput[1])[0].lower() == 'p':
+            #Remove all the players in the list
             for i in range(len(usrInput)-2):
                 if usrInput[i+2] in players:
                     del players[usrInput[i+2]]
                 else:
                     print("Player "+str(usrInput[i+2])+" not found.")
+        #If the user wants to remove an enemy
         elif str(usrInput[1])[0].lower() == 'e':
+            #Remove all the enemies in the list
             for i in range(len(usrInput)-2):
                 if usrInput[i+2] in enemies:
                     del enemies[usrInput[i+2]]
@@ -134,7 +136,6 @@ def controlFlow(usrInput,players,enemies):
         requestInput()
     #attack command!
     if usrInput[0] == 'attack':
-        print("calling attack function")
         attack(usrInput[1],usrInput[2])
         requestInput()
     #Roll init!
@@ -154,7 +155,7 @@ def controlFlow(usrInput,players,enemies):
         print("Turn order:")
         for i in turnOrder:
             print(str(i[0])+": "+str(i[1]))
-            requestInput()
+        requestInput()
 
         
 def attack(attacker,victim):
@@ -255,6 +256,9 @@ def requestInput():
 def addPlayer(players,pCount):
     """
     This function adds players and their states to the players dict. The players dict is a dictionary with nested dictionaries. The nested dictionaries contain the player's name as a key,and stat attributes as values.
+    Parameters-
+        players: the players dict
+        pCount: the number of players to add
     """
    
     casters = {'bard','cleric','druid','paliden','sorcerer','wizard','artificer','warlock'}
@@ -368,7 +372,26 @@ def addEnemy(enemies,eCount):
             'mAttackBonus':4,
             'rAttack':'1d6+2',
             'rAttackBonus':4
-        }}
+        },
+        'kobold':{
+            'hp':5,
+            'ac':12,
+            'curHp':5,
+            'strength':-1,
+            'dexterity':2,
+            'constitution':-1,
+            'intelligence':-1,
+            'wisdom':-1,
+            'charisma':-1,
+            'mAttack':'1d4+2',
+            'mAttackBonus':4,
+            'rAttack':'1d4+2',
+            'rAttackBonus':4
+        },
+    
+    ###PREMADE ENEMIES END###
+    }
+
    
 
     if input("Would you like to add a premade enemy(s)? (y/n)\n").lower() == 'y':
@@ -391,9 +414,9 @@ def addEnemy(enemies,eCount):
             attributes["intelligence"] = int(input("What is the intelligence bonus of enemy " + str(i+1) + "?\n"))
             attributes["wisdom"] = int(input("What is the wisdom bonus of enemy " + str(i+1) + "?\n"))
             attributes["charisma"] = int(input("What is the charisma bonus of enemy " + str(i+1) + "?\n"))
-            attributes["mAttack"] = input("What is the melee attack of enemy " + str(i+1) + "?\n")
+            attributes["mAttack"] = input("What is the melee attack of enemy " + str(i+1) + "?\n(Must be in the form adb+c, where a is the number of dice, b is the dice, and c is the modifier\n")
             attributes["mAttackBonus"] = int(input("What is the melee attack bonus of enemy " + str(i+1) + "?\n"))
-            attributes["rAttack"] = input("What is the ranged attack of enemy " + str(i+1) + "?\n")
+            attributes["rAttack"] = input("What is the ranged attack of enemy " + str(i+1) + "?\nMust be in the form adb+c, where a is the number of dice, b is the dice, and c is the modifier\n")
             attributes["rAttackBonus"] = int(input("What is the ranged attack bonus of enemy " + str(i+1) + "?\n"))
             enemies[name] = attributes
     requestInput()

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+	<head>
+		<title>Combat Tracker Home Page</title>
+		<link rel="stylesheet" href="../css/combatPage.css">
+	</head>
+	<body>
+		<h1 id="header"> Combat Page </h1>
+		<div id="encounterLoader">
+			<input type="button" class="buttons" id="goHome" value="Home" onclick="goHome()"/>
+			
+			<input type="file" id="encounter_loadInput" name="Load Encounter" title="Load Encounter">
+			<button type="button" class="buttons" id="loadEncounterButton" value="Load Encounter" onclick="loadEncounter()">Load Encounter</button>	
+			
+			<input type="button" class="buttons" id="createEncounter" value="Create Encounter" onclick="createEncounter()"/>
+			
+			<input type="file" id="combat_loadInput" name="Load Combat" title="Load Combat">
+			<button  type="button" class="buttons" id="loadComabtButton" value="Load Combat" onclick="loadCombat()">Load Combat</button>
+			
+			<input type="file" id="combat_saveInput" name="Save Combat" title="Save Combat">
+			<button type="button" class="buttons" id="saveCombatButton" value="Save Combat" onclick="saveCombat()">Save Combat</button>
+
+		</div>
+		<div id="entityList">
+			<h2 id="entityTitle"> Entities: </h2>
+			<ul id="entity-ist"></ul>
+		</div>
+		<div id="entityStats">
+			<h2 id="statTitle"> Entity Stats: </h2>
+		</div>
+		<script src="../js/combatPagejs.js"></script>
+	</body>
+</html>

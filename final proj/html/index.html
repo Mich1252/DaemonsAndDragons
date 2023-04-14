@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+    <head>
+		<title>Combat Tracker Login</title>
+		<link rel="stylesheet" href="../css/indexStyle.css">
+    </head>
+    <body>
+		<h1 id="header">Welcome to Combat Tracker!</h1>
+		<div id="create-account">
+			<h2>Create an Account</h2>
+			<form onsubmit="return false">
+				<label for="new-username">Username:</label>
+				<input type="text" id="new-username" name="new-username"><br><br>
+				<label for="new-password">Password:</label>
+				<input type="password" id="new-password" name="new-password"><br><br>
+				<input id="button" type="submit" value="Create Account" onclick="createAccount()">
+			</form>
+		</div>
+		<img src="../img/sword.jpg" alt="Sowrdimage" id="image">
+		<div id="login">
+			<h2>Login to Your Account</h2>
+			<form onsubmit="return false">
+				<label for="username">Username:</label>
+				<input type="text" id="username" name="username"><br><br>
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password"><br><br>
+				<input id="button" type="submit" value="Login" onclick="login()">
+			</form>
+		</div>
+		<script src="../js/indexjs.js"></script>
+	</body>
+</html>

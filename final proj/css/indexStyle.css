@@ -1,0 +1,60 @@
+body, html {
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	overflow: hidden;
+}
+
+#header {
+	color: white;
+	text-align: center;
+	font-size: 3.4vw;
+	position: absolute;
+	top: 3%;
+	left: 27%;
+	border: 2px double white;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+#create-account {
+	color: white;
+	position: absolute;
+	top: 24%;
+	left:10%;
+	width: 20%;
+	height: 50%;
+	font-size: 2vw;
+	border: 2px double white;
+	border-radius: 10px;
+	padding: 20px;
+	overflow: auto;
+}
+
+#login {
+	color: white;
+	position: absolute;
+	top: 24%;
+	left:63%;
+	width: 20%;
+	height: 50%;
+	font-size: 2vw;
+	border: 2px double white;
+	border-radius: 10px;
+	padding: 20px;
+	overflow: auto;
+}
+
+#image {
+	position: absolute;
+	left: 43%;
+	top: 20%;
+	height: 80%;
+	width: 10%
+}
+
+#button {
+	color: white;
+	background-color: #940000;
+	font-size: .8em;
+}

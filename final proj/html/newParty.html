@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Player Page</title>
+	<link rel="stylesheet" href="../css/newPlayersStyle.css">
+	<h1 class="onPageText">New Party Creator!</h1>
+</head>
+<body>
+	<div>
+		<h4 class="onPageText">Player Name and Class: </h4>
+		<!-- Create the name input field -->
+		<input id="player-name" type="text" placeholder="Name">
+
+		<!-- Create the class drop-down menu -->
+		<select id="player-class">
+			<option value="Barbarian">Barbarian</option>
+			<option value="Bard">Bard</option>
+			<option value="Cleric">Cleric</option>
+			<option value="Druid">Druid</option>
+			<option value="Fighter">Fighter</option>
+			<option value="Monk">Monk</option>
+			<option value="Paladin">Paladin</option>
+			<option value="Ranger">Ranger</option>
+			<option value="Rogue">Rogue</option>
+			<option value="Sorcerer">Sorcerer</option>
+			<option value="Warlock">Warlock</option>
+			<option value="Wizard">Wizard</option>
+		</select>
+		<br>
+		<!-- Create the level input field -->
+		<p class="onPageText"> Player level: </p>
+		<input id="player-level" type="number" placeholder="Level">
+		<br><br>
+		<!-- Create the submit button -->
+		<input class="button" id="addPlayerButton" type="submit" value="Add Player" onclick="addPlayer()">
+		<script src="../js/newPlayers.js"></script>
+	</div>
+	<div>
+		<!-- Create the player list -->
+		<h4 class="onPageText">Players:</h4>
+		<ul id="player-list"></ul>
+	</div>
+	
+	<!-- Create the remove player button -->
+	<input class="button" id="removePlayerButton" type="submit" value="Remove Player" onclick="removePlayer()">
+	
+	<!-- Create the finish porty button -->
+	<input class="button" id="finishButton" type="submit" value="Finish Party" onclick="finishParty()">
+
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+html, body {
+	background-color: #3b3b3b;
+	background-image: url("../img/newPlayers.jpg");
+}
+
+.onPageText {
+	color: white;
+}
+
+/* Style the button */
+.button {
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+#addPlayerButton {
+	color: #198a33;
+	background-color: black;
+	border: 3px solid #198a33;
+}
+
+#removePlayerButton {
+	color: red;
+	background-color: black;
+	border: 3px solid red;
+}
+
+/* Style the input fields */
+input[type=text], select {
+	width: 75%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+
+/* Style the player list */
+#player-list {
+	background-color: black;
+	border: 1px solid #ccc;
+	padding: 10px;
+	border-radius: 5px;
+	margin-top: 10px;
+	width: 85%;
+}
+
+/* Style the player item */
+.player-item {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 5px;
+}
+
+/* Style the player info */
+.player-info {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+/* Style the player name */
+.player-name {
+	font-weight: bold;
+}
+
+/* Style the player class and level */
+.player-level {
+    width: 50%;
+    font-size: 18px;
+    padding: 12px;
+}
+
+#finishButton {
+	padding: 8px;
+	font-size: 2em;
+	position: absolute;
+	right: 8%;
+    color: #b89b2a;
+	background-color: black;
+	border: 3px solid #b89b2a;
+}
